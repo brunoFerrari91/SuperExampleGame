@@ -1,3 +1,7 @@
+using Infrastructure;
+using Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
+
 namespace API;
 
 public class Program
@@ -7,6 +11,7 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
+        builder.Services.AddInfrastructureServices(builder.Configuration);
 
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -14,6 +19,14 @@ public class Program
         builder.Services.AddSwaggerGen();
 
         var app = builder.Build();
+
+        using (var scope = app.Services.CreateScope())
+        {
+            var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            context.Database.Migrate();
+
+            ApplicationDbContextInitialiser.SeedInitialData(context);
+        }
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
