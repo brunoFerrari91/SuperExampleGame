@@ -42,6 +42,7 @@
 * Agregar middleware de manejo de errores para devolver respuestas estandarizadas y atrapar errores no manejados.
 * Refactorizar handler de compra para facilitar la lectura y reutilización del código.
 * Agregar endpoint para visualizar items disponibles.
+* Realizar tests unitarios
 ***
 ## Detalle de datos inicales
 
