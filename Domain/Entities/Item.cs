@@ -3,9 +3,9 @@
 public class Item
 {
     public int Id { get; set; }
-    public string? Nombre { get; set; }
+    public string Nombre { get; set; } = null!;
     public int CostoOro { get; set; }
     public int CostoDiamante { get; set; }
-    public List<Destreza>? Destrezas { get; set; }
+    public List<Destreza> Destrezas { get; set; } = null!;
 }
 
